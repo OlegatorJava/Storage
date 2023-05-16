@@ -9,6 +9,7 @@ import ru.gb.storage.entities.OrderItem;
 import ru.gb.storage.entities.Role;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Data
@@ -18,6 +19,6 @@ public class UserDto {
 
     private Long id;
     private String name;
-    private Collection<Role> roles;
+    private List<Role> roles;
 
 }

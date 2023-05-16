@@ -49,4 +49,6 @@ create table order_items
     quantity          bigint not null,
     price_per_product int    not null,
     price             int    not null
-)
+);
+
+alter table users add orders_id bigint references orders(id);

@@ -6,6 +6,7 @@ import lombok.Data;
 import ru.gb.storage.dto.OrderDto;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,9 +22,9 @@ public class User {
     @JoinTable(name = "users_roles",
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private Collection<Role> roles;
+    private List<Role> roles;
     @OneToMany(mappedBy="users", fetch=FetchType.LAZY)
-    private Collection<OrderItem> orderItems;
+    private List<OrderItem> orderItems;
     @OneToMany(mappedBy="users", fetch=FetchType.LAZY)
-    private Collection<Order> orders;
+    private List<Order> orders;
 }

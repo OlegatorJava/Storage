@@ -59,11 +59,11 @@ public class OrderService {
                         o.getAddress(),
                         o.getPhone(),
                         o.getOrderItems().stream().map(orderItem -> new OrderItemDto(
-                                orderItem.getId(),
-                                orderItem.getTitle(),
-                                orderItem.getQuantity(),
-                                orderItem.getPricePerProduct(),
-                                orderItem.getPrice()
+                                        orderItem.getId(),
+                                        orderItem.getTitle(),
+                                        orderItem.getQuantity(),
+                                        orderItem.getPricePerProduct(),
+                                        orderItem.getPrice()
                                 )
                         ).collect(Collectors.toList())
                 )

@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.storage.converters.UserMapper;
+import ru.gb.storage.dto.OrderDto;
+import ru.gb.storage.dto.OrderItemDto;
 import ru.gb.storage.dto.UserDto;
 import ru.gb.storage.entities.Role;
 import ru.gb.storage.entities.User;
@@ -43,14 +45,6 @@ public class UserService implements UserDetailsService {
         }
         return usersDetails;
     }
-    public List<UserDto> findAllUsersDto(){
-        List<User> allUsers = userRepository.findAll();
-        return UserMapper.USER_MAPPER.fromListUsers(allUsers);
-    }
-
-    public Long findIdByName(String name){
-        return userRepository.findIdByName(name);
-    }
 
 
     @Override
@@ -62,5 +56,26 @@ public class UserService implements UserDetailsService {
 
     private Collection<SimpleGrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getTitle())).collect(Collectors.toList());
+    }
+
+    public List<OrderDto> findAllOrdersByUserId(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceptions(String.format("User with id '%s' not found", id)));
+        List<OrderDto> orderDtoList = user.getOrders().stream().map(o -> new OrderDto(
+                        o.getId(),
+                        new UserDto(o.getUsers().getId(), o.getUsers().getName(), o.getUsers().getRoles()),
+                        o.getTotalPrice(),
+                        o.getAddress(),
+                        o.getPhone(),
+                        o.getOrderItems().stream().map(orderItem -> new OrderItemDto(
+                                        orderItem.getId(),
+                                        orderItem.getTitle(),
+                                        orderItem.getQuantity(),
+                                        orderItem.getPricePerProduct(),
+                                        orderItem.getPrice()
+                                )
+                        ).collect(Collectors.toList())
+                )
+        ).collect(Collectors.toList());
+        return orderDtoList;
     }
 }

@@ -8,7 +8,6 @@ import ru.gb.storage.entities.Order;
 import ru.gb.storage.entities.User;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemDto {
 
@@ -16,6 +15,13 @@ public class OrderItemDto {
     private String title;
     private int quantity;
     private int pricePerProduct;
-    private int price ;
+    private int price;
 
+    public OrderItemDto(Long id, String title, int quantity, int pricePerProduct, int price) {
+        this.id = id;
+        this.title = title;
+        this.quantity = quantity;
+        this.pricePerProduct = pricePerProduct;
+        this.price = price;
+    }
 }
