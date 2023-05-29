@@ -23,6 +23,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 import ru.gb.storage.filters.JwtRequestFilter;
 import ru.gb.storage.services.JwtService;
 import ru.gb.storage.services.UserService;
@@ -45,6 +46,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests()
+
                 .requestMatchers(HttpMethod.GET, "/order/add")
                 .authenticated()
                 .requestMatchers(HttpMethod.GET, "/cart/change")

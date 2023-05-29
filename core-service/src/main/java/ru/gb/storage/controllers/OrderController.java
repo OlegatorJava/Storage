@@ -7,12 +7,14 @@ import ru.gb.storage.api.OrderDto;
 
 import ru.gb.storage.services.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/order")
 @Slf4j
+@CrossOrigin("*")
 public class OrderController {
     private final OrderService orderService;
 

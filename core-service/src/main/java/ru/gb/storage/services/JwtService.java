@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class JwtService {
 
     private String secret = "mcdmcdsIIOFEBfejbfjsdfsefBBBEFB";
-    private Long expirationToken = 60000L;
+    private Long expirationToken = (long) 8.64e+7;
 
     public String generateJwtToken(UserDetails user){
         String username = user.getUsername();
